@@ -54,7 +54,7 @@ tor2e_roll20/
 ### Installazione dipendenze
 
 ```bash
-pip install playwright playwright-stealth pypdf Pillow reportlab
+pip install -r requirements.txt
 playwright install chromium
 ```
 

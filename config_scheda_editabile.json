@@ -1,0 +1,1109 @@
+{
+  "_meta": {
+    "pdf": "scheda_editabile_2.pdf",
+    "total_fields": 219,
+    "note": "Ogni campo ha: 'type' (/Tx=testo, /Btn=checkbox/radio), 'json_path' (path nel JSON personaggio, da compilare), 'sample_value' (valore di esempio dal personaggio di test se fornito). Per i campi radio abilità il json_path usa la sintassi 'skills.xxx.rating>=N' che significa: spunta se rating >= N."
+  },
+  "fields": {
+    "allerta_1": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=1",
+      "sample_value": "✓"
+    },
+    "allerta_2": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=2",
+      "sample_value": "✓"
+    },
+    "allerta_3": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=3",
+      "sample_value": ""
+    },
+    "allerta_4": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=4",
+      "sample_value": ""
+    },
+    "allerta_5": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=5",
+      "sample_value": ""
+    },
+    "allerta_6": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.rating>=6",
+      "sample_value": ""
+    },
+    "archi_1": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=1",
+      "sample_value": ""
+    },
+    "archi_2": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=2",
+      "sample_value": ""
+    },
+    "archi_3": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=3",
+      "sample_value": ""
+    },
+    "archi_4": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=4",
+      "sample_value": ""
+    },
+    "archi_5": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=5",
+      "sample_value": ""
+    },
+    "archi_6": {
+      "type": "/Btn",
+      "json_path": "combat_skills.bows.rating>=6",
+      "sample_value": ""
+    },
+    "armatura": {
+      "type": "/Tx",
+      "json_path": "armour.armour.name",
+      "_note": "mapping completato manualmente"
+    },
+    "armatura_ingombro": {
+      "type": "/Tx",
+      "json_path": "armour.armour.load",
+      "sample_value": "0"
+    },
+    "armatura_protezione": {
+      "type": "/Tx",
+      "json_path": "armour.armour.prot",
+      "sample_value": "0"
+    },
+    "asce_1": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=1",
+      "sample_value": ""
+    },
+    "asce_2": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=2",
+      "sample_value": ""
+    },
+    "asce_3": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=3",
+      "sample_value": ""
+    },
+    "asce_4": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=4",
+      "sample_value": ""
+    },
+    "asce_5": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=5",
+      "sample_value": ""
+    },
+    "asce_6": {
+      "type": "/Btn",
+      "json_path": "combat_skills.axes.rating>=6",
+      "sample_value": ""
+    },
+    "atletica_1": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=1",
+      "sample_value": ""
+    },
+    "atletica_2": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=2",
+      "sample_value": ""
+    },
+    "atletica_3": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=3",
+      "sample_value": ""
+    },
+    "atletica_4": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=4",
+      "sample_value": ""
+    },
+    "atletica_5": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=5",
+      "sample_value": ""
+    },
+    "atletica_6": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.rating>=6",
+      "sample_value": ""
+    },
+    "battaglia_1": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=1",
+      "sample_value": ""
+    },
+    "battaglia_2": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=2",
+      "sample_value": ""
+    },
+    "battaglia_3": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=3",
+      "sample_value": ""
+    },
+    "battaglia_4": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=4",
+      "sample_value": ""
+    },
+    "battaglia_5": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=5",
+      "sample_value": ""
+    },
+    "battaglia_6": {
+      "type": "/Btn",
+      "json_path": "skills.battle.rating>=6",
+      "sample_value": ""
+    },
+    "caccia_1": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=1",
+      "sample_value": ""
+    },
+    "caccia_2": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=2",
+      "sample_value": ""
+    },
+    "caccia_3": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=3",
+      "sample_value": ""
+    },
+    "caccia_4": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=4",
+      "sample_value": ""
+    },
+    "caccia_5": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=5",
+      "sample_value": ""
+    },
+    "caccia_6": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.rating>=6",
+      "sample_value": ""
+    },
+    "canzoni_1": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=1",
+      "sample_value": "✓"
+    },
+    "canzoni_2": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=2",
+      "sample_value": "✓"
+    },
+    "canzoni_3": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=3",
+      "sample_value": ""
+    },
+    "canzoni_4": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=4",
+      "sample_value": ""
+    },
+    "canzoni_5": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=5",
+      "sample_value": ""
+    },
+    "canzoni_6": {
+      "type": "/Btn",
+      "json_path": "skills.song.rating>=6",
+      "sample_value": ""
+    },
+    "condizioni_spunta-affaticato": {
+      "type": "/Btn",
+      "json_path": "conditions.weary",
+      "sample_value": "0"
+    },
+    "condizioni_spunta-ferito": {
+      "type": "/Btn",
+      "json_path": "conditions.wounded",
+      "sample_value": "0"
+    },
+    "condizioni_spunta-oppresso": {
+      "type": "/Btn",
+      "json_path": "conditions.miserable",
+      "sample_value": "0"
+    },
+    "convincere_1": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=1",
+      "sample_value": "✓"
+    },
+    "convincere_2": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=2",
+      "sample_value": "✓"
+    },
+    "convincere_3": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=3",
+      "sample_value": ""
+    },
+    "convincere_4": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=4",
+      "sample_value": ""
+    },
+    "convincere_5": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=5",
+      "sample_value": ""
+    },
+    "convincere_6": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.rating>=6",
+      "sample_value": ""
+    },
+    "cortesia_1": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=1",
+      "sample_value": "✓"
+    },
+    "cortesia_2": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=2",
+      "sample_value": "✓"
+    },
+    "cortesia_3": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=3",
+      "sample_value": ""
+    },
+    "cortesia_4": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=4",
+      "sample_value": ""
+    },
+    "cortesia_5": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=5",
+      "sample_value": ""
+    },
+    "cortesia_6": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.rating>=6",
+      "sample_value": ""
+    },
+    "cultura-eroica": {
+      "type": "/Tx",
+      "json_path": "info.culture",
+      "sample_value": "Hobbit della Contea"
+    },
+    "cuore_grado": {
+      "type": "/Tx",
+      "json_path": "attributes.heart.rating",
+      "sample_value": "6"
+    },
+    "cuore_speranza": {
+      "type": "/Tx",
+      "json_path": "derived.hope.max",
+      "sample_value": "16"
+    },
+    "cuore_tn": {
+      "type": "/Tx",
+      "json_path": "attributes.heart.tn",
+      "sample_value": "12"
+    },
+    "danno_1": {
+      "type": "/Tx",
+      "json_path": "weapons[0].damage",
+      "sample_value": "3"
+    },
+    "danno_2": {
+      "type": "/Tx",
+      "json_path": "weapons[1].damage",
+      "sample_value": ""
+    },
+    "danno_3": {
+      "type": "/Tx",
+      "json_path": "weapons[2].damage",
+      "sample_value": ""
+    },
+    "danno_4": {
+      "type": "/Tx",
+      "json_path": "weapons[3].damage",
+      "sample_value": ""
+    },
+    "difetti_1": {
+      "type": "/Tx",
+      "json_path": "info.flaws",
+      "sample_value": ""
+    },
+    "difetti_2": {
+      "type": "/Tx",
+      "json_path": "info.flaws",
+      "sample_value": ""
+    },
+    "discesa-nella-ombra": {
+      "type": "/Tx",
+      "json_path": "info.shadow_weakness",
+      "sample_value": ""
+    },
+    "elmo": {
+      "type": "/Tx",
+      "json_path": "armour.helm.name",
+      "_note": "mapping completato manualmente"
+    },
+    "elmo_ingombro": {
+      "type": "/Tx",
+      "json_path": "armour.helm.load",
+      "sample_value": "0"
+    },
+    "elmo_protezione": {
+      "type": "/Tx",
+      "json_path": "armour.helm.prot",
+      "sample_value": "0"
+    },
+    "equip-viaggio": {
+      "type": "/Tx",
+      "json_path": "gear.travellinggear",
+      "sample_value": ""
+    },
+    "equipaggiamente_3": {
+      "type": "/Tx",
+      "json_path": "weapons[2].skill_name",
+      "_note": "mapping completato manualmente"
+    },
+    "equipaggiamento_1": {
+      "type": "/Tx",
+      "json_path": "weapons[0].skill_name",
+      "sample_value": "Spada corta"
+    },
+    "equipaggiamento_2": {
+      "type": "/Tx",
+      "json_path": "weapons[1].skill_name",
+      "sample_value": ""
+    },
+    "equipaggiamento_4": {
+      "type": "/Tx",
+      "json_path": "weapons[3].skill_name",
+      "sample_value": ""
+    },
+    "esplorazione_1": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=1",
+      "sample_value": ""
+    },
+    "esplorazione_2": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=2",
+      "sample_value": ""
+    },
+    "esplorazione_3": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=3",
+      "sample_value": ""
+    },
+    "esplorazione_4": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=4",
+      "sample_value": ""
+    },
+    "esplorazione_5": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=5",
+      "sample_value": ""
+    },
+    "esplorazione_6": {
+      "type": "/Btn",
+      "json_path": "skills.explore.rating>=6",
+      "sample_value": ""
+    },
+    "eta": {
+      "type": "/Tx",
+      "json_path": "info.age",
+      "sample_value": "34"
+    },
+    "ferire_1": {
+      "type": "/Tx",
+      "json_path": "weapons[0].injury",
+      "sample_value": "14"
+    },
+    "ferire_2": {
+      "type": "/Tx",
+      "json_path": "weapons[1].injury",
+      "sample_value": ""
+    },
+    "ferire_3": {
+      "type": "/Tx",
+      "json_path": "weapons[2].injury",
+      "sample_value": ""
+    },
+    "ferire_4": {
+      "type": "/Tx",
+      "json_path": "weapons[3].injury",
+      "sample_value": ""
+    },
+    "forza_grado": {
+      "type": "/Tx",
+      "json_path": "attributes.strength.rating",
+      "sample_value": "2"
+    },
+    "forza_resistenza": {
+      "type": "/Tx",
+      "json_path": "derived.endurance.max",
+      "sample_value": "20"
+    },
+    "forza_tn": {
+      "type": "/Tx",
+      "json_path": "attributes.strength.tn",
+      "sample_value": "16"
+    },
+    "furtivita_1": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=1",
+      "sample_value": "✓"
+    },
+    "furtivita_2": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=2",
+      "sample_value": "✓"
+    },
+    "furtivita_3": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=3",
+      "sample_value": "✓"
+    },
+    "furtivita_4": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=4",
+      "sample_value": ""
+    },
+    "furtivita_5": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=5",
+      "sample_value": ""
+    },
+    "furtivita_6": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.rating>=6",
+      "sample_value": ""
+    },
+    "guarigione_1": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=1",
+      "sample_value": "✓"
+    },
+    "guarigione_2": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=2",
+      "sample_value": "✓"
+    },
+    "guarigione_3": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=3",
+      "sample_value": ""
+    },
+    "guarigione_4": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=4",
+      "sample_value": ""
+    },
+    "guarigione_5": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=5",
+      "sample_value": ""
+    },
+    "guarigione_6": {
+      "type": "/Btn",
+      "json_path": "skills.healing.rating>=6",
+      "sample_value": ""
+    },
+    "immagine-pg": {
+      "type": "/Btn",
+      "json_path": "",
+      "_note": "campo immagine: non compilabile via pypdf"
+    },
+    "incoraggiare_1": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=1",
+      "sample_value": ""
+    },
+    "incoraggiare_2": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=2",
+      "sample_value": ""
+    },
+    "incoraggiare_3": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=3",
+      "sample_value": ""
+    },
+    "incoraggiare_4": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=4",
+      "sample_value": ""
+    },
+    "incoraggiare_5": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=5",
+      "sample_value": ""
+    },
+    "incoraggiare_6": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.rating>=6",
+      "sample_value": ""
+    },
+    "indovinelli_1": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=1",
+      "sample_value": "✓"
+    },
+    "indovinelli_2": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=2",
+      "sample_value": "✓"
+    },
+    "indovinelli_3": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=3",
+      "sample_value": "✓"
+    },
+    "indovinelli_4": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=4",
+      "sample_value": ""
+    },
+    "indovinelli_5": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=5",
+      "sample_value": ""
+    },
+    "indovinelli_6": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.rating>=6",
+      "sample_value": ""
+    },
+    "ingegno_difesa": {
+      "type": "/Tx",
+      "json_path": "derived.parry.base",
+      "sample_value": "8"
+    },
+    "ingegno_tn": {
+      "type": "/Tx",
+      "json_path": "attributes.wits.tn",
+      "sample_value": "11"
+    },
+    "ingengo_grado": {
+      "type": "/Tx",
+      "json_path": "attributes.wits.rating",
+      "_note": "mapping completato manualmente"
+    },
+    "ingombro_1": {
+      "type": "/Tx",
+      "json_path": "weapons[0].load",
+      "sample_value": "1"
+    },
+    "ingombro_2": {
+      "type": "/Tx",
+      "json_path": "weapons[1].load",
+      "sample_value": ""
+    },
+    "ingombro_3": {
+      "type": "/Tx",
+      "json_path": "weapons[2].load",
+      "sample_value": ""
+    },
+    "ingombro_4": {
+      "type": "/Tx",
+      "json_path": "weapons[3].load",
+      "sample_value": ""
+    },
+    "intimorire_1": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=1",
+      "sample_value": ""
+    },
+    "intimorire_2": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=2",
+      "sample_value": ""
+    },
+    "intimorire_3": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=3",
+      "sample_value": ""
+    },
+    "intimorire_4": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=4",
+      "sample_value": ""
+    },
+    "intimorire_5": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=5",
+      "sample_value": ""
+    },
+    "intimorire_6": {
+      "type": "/Btn",
+      "json_path": "skills.awe.rating>=6",
+      "sample_value": ""
+    },
+    "lance_1": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=1",
+      "sample_value": ""
+    },
+    "lance_2": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=2",
+      "sample_value": ""
+    },
+    "lance_3": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=3",
+      "sample_value": ""
+    },
+    "lance_4": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=4",
+      "sample_value": ""
+    },
+    "lance_5": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=5",
+      "sample_value": ""
+    },
+    "lance_6": {
+      "type": "/Btn",
+      "json_path": "combat_skills.spears.rating>=6",
+      "sample_value": ""
+    },
+    "lesioni": {
+      "type": "/Tx",
+      "json_path": "conditions.injury",
+      "sample_value": ""
+    },
+    "manualita_1": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=1",
+      "sample_value": "✓"
+    },
+    "manualita_2": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=2",
+      "sample_value": ""
+    },
+    "manualita_3": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=3",
+      "sample_value": ""
+    },
+    "manualita_4": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=4",
+      "sample_value": ""
+    },
+    "manualita_5": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=5",
+      "sample_value": ""
+    },
+    "manualita_6": {
+      "type": "/Btn",
+      "json_path": "skills.craft.rating>=6",
+      "sample_value": ""
+    },
+    "nome": {
+      "type": "/Tx",
+      "json_path": "character_name",
+      "sample_value": "Eglantina Scarpati"
+    },
+    "note_1": {
+      "type": "/Tx",
+      "json_path": "weapons[0].note",
+      "sample_value": ""
+    },
+    "note_2": {
+      "type": "/Tx",
+      "json_path": "weapons[1].note",
+      "sample_value": ""
+    },
+    "note_3": {
+      "type": "/Tx",
+      "json_path": "weapons[2].note",
+      "sample_value": ""
+    },
+    "note_4": {
+      "type": "/Tx",
+      "json_path": "weapons[3].note",
+      "sample_value": ""
+    },
+    "patrono": {
+      "type": "/Tx",
+      "json_path": "info.patron",
+      "sample_value": ""
+    },
+    "perspicacia_1": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=1",
+      "sample_value": "✓"
+    },
+    "perspicacia_2": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=2",
+      "sample_value": "✓"
+    },
+    "perspicacia_3": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=3",
+      "sample_value": ""
+    },
+    "perspicacia_4": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=4",
+      "sample_value": ""
+    },
+    "perspicacia_5": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=5",
+      "sample_value": ""
+    },
+    "perspicacia_6": {
+      "type": "/Btn",
+      "json_path": "skills.insight.rating>=6",
+      "sample_value": ""
+    },
+    "punti-abilita": {
+      "type": "/Tx",
+      "json_path": "experience.skillpoints",
+      "sample_value": "0"
+    },
+    "punti-avventura": {
+      "type": "/Tx",
+      "json_path": "experience.adventurepoints",
+      "sample_value": "0"
+    },
+    "res-attuale": {
+      "type": "/Tx",
+      "json_path": "derived.endurance.current",
+      "sample_value": "20"
+    },
+    "res-attuale_fatica": {
+      "type": "/Tx",
+      "json_path": "derived.fatigue",
+      "sample_value": "20"
+    },
+    "res-attuale_ingombro": {
+      "type": "/Tx",
+      "json_path": "derived.load",
+      "sample_value": "20"
+    },
+    "ricompense": {
+      "type": "/Tx",
+      "json_path": "rewards",
+      "sample_value": ""
+    },
+    "ricompense_valore": {
+      "type": "/Tx",
+      "json_path": "wisdom_valour.valour.rating",
+      "sample_value": "1"
+    },
+    "sapienza_1": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=1",
+      "sample_value": "✓"
+    },
+    "sapienza_2": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=2",
+      "sample_value": "✓"
+    },
+    "sapienza_3": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=3",
+      "sample_value": ""
+    },
+    "sapienza_4": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=4",
+      "sample_value": ""
+    },
+    "sapienza_5": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=5",
+      "sample_value": ""
+    },
+    "sapienza_6": {
+      "type": "/Btn",
+      "json_path": "skills.lore.rating>=6",
+      "sample_value": ""
+    },
+    "scrutare_1": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=1",
+      "sample_value": "✓"
+    },
+    "scrutare_2": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=2",
+      "sample_value": "✓"
+    },
+    "scrutare_3": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=3",
+      "sample_value": ""
+    },
+    "scrutare_4": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=4",
+      "sample_value": ""
+    },
+    "scrutare_5": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=5",
+      "sample_value": ""
+    },
+    "scrutare_6": {
+      "type": "/Btn",
+      "json_path": "skills.scan.rating>=6",
+      "sample_value": ""
+    },
+    "scudo": {
+      "type": "/Tx",
+      "json_path": "armour.shield.name",
+      "_note": "mapping completato manualmente"
+    },
+    "scudo_ingombro": {
+      "type": "/Tx",
+      "json_path": "armour.shield.load",
+      "sample_value": "0"
+    },
+    "scudo_protezione": {
+      "type": "/Tx",
+      "json_path": "armour.shield.parry",
+      "sample_value": "0"
+    },
+    "spade_1": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=1",
+      "sample_value": "✓"
+    },
+    "spade_2": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=2",
+      "sample_value": "✓"
+    },
+    "spade_3": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=3",
+      "sample_value": ""
+    },
+    "spade_4": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=4",
+      "sample_value": ""
+    },
+    "spade_5": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=5",
+      "sample_value": ""
+    },
+    "spade_6": {
+      "type": "/Btn",
+      "json_path": "combat_skills.swords.rating>=6",
+      "sample_value": ""
+    },
+    "spe-attuale": {
+      "type": "/Tx",
+      "json_path": "derived.hope.current",
+      "sample_value": "16"
+    },
+    "spe-attuale_cicatrice-ombra": {
+      "type": "/Tx",
+      "json_path": "shadow.shadowscar",
+      "sample_value": "16"
+    },
+    "spe-attuale_punti-ombra": {
+      "type": "/Tx",
+      "json_path": "shadow.shadow",
+      "sample_value": "16"
+    },
+    "spunta-allerta": {
+      "type": "/Btn",
+      "json_path": "skills.awareness.favoured",
+      "sample_value": "0"
+    },
+    "spunta-atletica": {
+      "type": "/Btn",
+      "json_path": "skills.athletics.favoured",
+      "sample_value": "0"
+    },
+    "spunta-battaglia": {
+      "type": "/Btn",
+      "json_path": "skills.battle.favoured",
+      "sample_value": "0"
+    },
+    "spunta-caccia": {
+      "type": "/Btn",
+      "json_path": "skills.hunting.favoured",
+      "sample_value": "0"
+    },
+    "spunta-canzoni": {
+      "type": "/Btn",
+      "json_path": "skills.song.favoured",
+      "sample_value": "0"
+    },
+    "spunta-convincere": {
+      "type": "/Btn",
+      "json_path": "skills.persuade.favoured",
+      "sample_value": "0"
+    },
+    "spunta-cortesia": {
+      "type": "/Btn",
+      "json_path": "skills.courtesy.favoured",
+      "sample_value": "1"
+    },
+    "spunta-esplorazione": {
+      "type": "/Btn",
+      "json_path": "skills.explore.favoured",
+      "sample_value": "0"
+    },
+    "spunta-furtivita": {
+      "type": "/Btn",
+      "json_path": "skills.stealth.favoured",
+      "sample_value": "0"
+    },
+    "spunta-guarigione": {
+      "type": "/Btn",
+      "json_path": "skills.healing.favoured",
+      "sample_value": "0"
+    },
+    "spunta-incoraggiare": {
+      "type": "/Btn",
+      "json_path": "skills.enhearten.favoured",
+      "sample_value": "0"
+    },
+    "spunta-indovinelli": {
+      "type": "/Btn",
+      "json_path": "skills.riddle.favoured",
+      "sample_value": "0"
+    },
+    "spunta-intimorire": {
+      "type": "/Btn",
+      "json_path": "skills.awe.favoured",
+      "sample_value": "0"
+    },
+    "spunta-manualita": {
+      "type": "/Btn",
+      "json_path": "skills.craft.favoured",
+      "sample_value": "0"
+    },
+    "spunta-perspicacia": {
+      "type": "/Btn",
+      "json_path": "skills.insight.favoured",
+      "sample_value": "0"
+    },
+    "spunta-sapienza": {
+      "type": "/Btn",
+      "json_path": "skills.lore.favoured",
+      "sample_value": "0"
+    },
+    "spunta-scrutare": {
+      "type": "/Btn",
+      "json_path": "skills.scan.favoured",
+      "sample_value": "0"
+    },
+    "spunta-viaggio": {
+      "type": "/Btn",
+      "json_path": "skills.travel.favoured",
+      "sample_value": "0"
+    },
+    "tenore-di-vita": {
+      "type": "/Tx",
+      "json_path": "info.standard_of_living",
+      "sample_value": "Prospero"
+    },
+    "tesoro": {
+      "type": "/Tx",
+      "json_path": "experience.treasure",
+      "sample_value": "0"
+    },
+    "tratti-distintivi": {
+      "type": "/Tx",
+      "json_path": "info.distinctive_features",
+      "sample_value": "Curiosa, Educata, Rime di sapienza"
+    },
+    "valore-compagnia": {
+      "type": "/Tx",
+      "json_path": "experience.fellowship",
+      "sample_value": "0"
+    },
+    "vantaggio-culturale": {
+      "type": "/Tx",
+      "json_path": "info.cultural_blessing",
+      "sample_value": "Buon senso"
+    },
+    "viaggio_1": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=1",
+      "sample_value": ""
+    },
+    "viaggio_2": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=2",
+      "sample_value": ""
+    },
+    "viaggio_3": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=3",
+      "sample_value": ""
+    },
+    "viaggio_4": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=4",
+      "sample_value": ""
+    },
+    "viaggio_5": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=5",
+      "sample_value": ""
+    },
+    "viaggio_6": {
+      "type": "/Btn",
+      "json_path": "skills.travel.rating>=6",
+      "sample_value": ""
+    },
+    "virtu": {
+      "type": "/Tx",
+      "json_path": "virtues",
+      "sample_value": "Prodezza (ing.)"
+    },
+    "virtu_saggezza": {
+      "type": "/Tx",
+      "json_path": "wisdom_valour.wisdom.rating",
+      "sample_value": "1"
+    },
+    "vocazione": {
+      "type": "/Tx",
+      "json_path": "info.calling",
+      "sample_value": "Studiosa"
+    },
+    "bio": {
+      "type": "/Tx",
+      "json_path": "bio",
+      "_note": "testo plain fallback — formattazione ricca via overlay ReportLab"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-"""
+r"""
 Roll20 - The One Ring 2e (Advanced) - Compilatore automatico schede
 ====================================================================
 Scheda versione: 03-14-00
@@ -35,8 +35,8 @@ from playwright.sync_api import sync_playwright
 from playwright_stealth import Stealth
 
 # ── Configurazione ─────────────────────────────────────────────────────────────
-CAMPAIGN_ID     = "13540628"    # ID numerico visibile nell'URL setcampaign
-CHARACTERS_FILE = Path(__file__).parent / "personaggi.json"
+CAMPAIGN_ID     = "22234165"    # ID numerico visibile nell'URL setcampaign
+CHARACTERS_FILE = Path(__file__).parent / "out_of_the_shadow.json"
 PAUSE           = 0.3           # pausa tra campi (secondi)
 LONG_PAUSE      = 2.0           # pausa dopo apertura scheda
 
@@ -52,6 +52,10 @@ USE_PROFILE_COPY = False
 
 # Porta CDP per la modalità --mode cdp
 CDP_URL = "http://127.0.0.1:9222"
+
+# Pulsante "Personaggio" del Journal: Roll20 ha tolto l'id #addnewcharacter
+# nella nuova UI (pulsante "grimoire"); il vecchio id resta come fallback
+ADD_CHARACTER_BUTTON = "#addnewcharacter, #journal button.grimoire__button--primary"
 
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -179,7 +183,7 @@ def open_campaign(page, campaign_id: str) -> None:
             pass
 
     # Aspetta il pulsante "Personaggio" — segnale che il journal è pronto
-    page.wait_for_selector("#addnewcharacter", state="visible", timeout=30000)
+    page.wait_for_selector(ADD_CHARACTER_BUTTON, state="visible", timeout=30000)
     time.sleep(LONG_PAUSE)
     print("  ✓ Journal pronto")
 
@@ -328,7 +332,7 @@ def open_character_sheet(page, name: str, open_sheet_tab: bool = False) -> None:
 
     if not found:
         print(f"  → '{name}' non trovato. Creazione nuovo personaggio...")
-        page.click("#addnewcharacter", timeout=5000)
+        page.locator(ADD_CHARACTER_BUTTON).first.click(timeout=5000)
         time.sleep(2)
         # Aspetta la dialog di creazione con il campo nome
         page.wait_for_selector(".ui-dialog input.name[data-test='character-edit-name']", timeout=15000)

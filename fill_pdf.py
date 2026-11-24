@@ -24,12 +24,13 @@ import io
 import re
 from pathlib import Path
 from pypdf import PdfReader, PdfWriter
-from pypdf.generic import NameObject
+from pypdf.generic import NameObject, TextStringObject
 from PIL import Image
 from reportlab.pdfgen import canvas as rl_canvas
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib import colors
+from validate_characters import load_and_validate
 
 # ── Configurazione ─────────────────────────────────────────────────────────────
 CHARACTERS_FILE = Path(__file__).parent / "personaggi.json"
@@ -292,10 +293,18 @@ def rect_campo_su_pagina(page, nome: str) -> tuple | None:
     return None
 
 
+def get_info_field(char: dict, key: str) -> str:
+    """
+    Legge un campo da "info" (schema attuale: info.bio, info.image_path),
+    con ripiego sul primo livello del personaggio (schema vecchio).
+    """
+    return char.get("info", {}).get(key) or char.get(key) or ""
+
+
 def fill_page2(writer: PdfWriter, char: dict, base_dir: Path) -> None:
     """Compila pagina 2: bio formattata e immagine nella colonna sinistra."""
-    bio_md         = char.get("bio", "")
-    image_path_str = char.get("info", {}).get("image_path", "")
+    bio_md         = get_info_field(char, "bio")
+    image_path_str = get_info_field(char, "image_path")
 
     page      = writer.pages[1]
     page_size = dimensioni_pagina(page)
@@ -595,6 +604,52 @@ def scrivi_aspetto_ruotato(writer: PdfWriter, annot, valore: str) -> None:
     )
 
 
+def adatta_font_campi(writer: PdfWriter, page, field_values: dict) -> int:
+    """
+    Nei campi di testo a una riga con dimensione del font fissa (es. il nome a
+    pagina 2, 24 pt) riduce il font quando il valore non entra nella larghezza
+    del campo. Va chiamata prima di update_page_form_field_values, che genera
+    l'aspetto dal /DA del widget. Restituisce quanti campi sono stati ridotti.
+    """
+    acroform = writer._root_object["/AcroForm"]
+    dr = acroform.get("/DR")
+    dr_font = dr.get_object().get("/Font") if dr is not None else None
+    ridotti = 0
+    for ref in page.get("/Annots") or []:
+        annot = ref.get_object()
+        if annot.get("/Subtype") != "/Widget" or _attributo_campo(annot, "/FT") != "/Tx":
+            continue
+        if _rotazione_widget(annot) in (90, 270):
+            continue                                    # gestiti da correggi_campi_ruotati
+        if int(_attributo_campo(annot, "/Ff", 0)) & 4096:
+            continue                                    # multilinea
+        nome = _nome_campo(annot)
+        valore = field_values.get(nome, field_values.get(nome.split(".")[-1]))
+        if valore is None or str(valore) == "":
+            continue
+        da = str(_attributo_campo(annot, "/DA", acroform.get("/DA", "")))
+        m = re.search(r"/([^\s/]+)\s+([\d.]+)\s+Tf", da)
+        if not m or float(m.group(2)) <= 0:
+            continue                                    # dimensione automatica: ci pensa il lettore
+        font_nome, size = m.group(1), float(m.group(2))
+        font_ref = dr_font.get_object().get(f"/{font_nome}") if dr_font else None
+        larghezza = _misuratore(font_ref.get_object() if font_ref is not None else None)
+
+        x0, _, x1, _ = [float(v) for v in annot["/Rect"]]
+        max_w = abs(x1 - x0) - 2 * TESTO_MARGINE
+        testo = str(valore).replace("\n", " ")
+        w = larghezza(testo, size)
+        if w <= max_w:
+            continue
+        nuova = max(TESTO_MIN_PT, int(size * max_w / w * 2) / 2)   # arrotonda a 0,5 pt
+        annot[NameObject("/DA")] = TextStringObject(
+            da[:m.start(2)] + f"{nuova:g}" + da[m.end(2):]
+        )
+        print(f"  ✓ Campo '{nome}': font da {size:g} a {nuova:g} pt per far entrare il testo")
+        ridotti += 1
+    return ridotti
+
+
 def correggi_campi_ruotati(writer: PdfWriter, page, field_values: dict) -> int:
     """Riscrive l'aspetto dei campi di testo ruotati compilati. Restituisce quanti."""
     corretti = 0
@@ -820,12 +875,13 @@ def fill_character_pdf(
     n_ruotati = 0
     for page in writer.pages:
         if page.get("/Annots"):
+            adatta_font_campi(writer, page, field_values)
             writer.update_page_form_field_values(page, field_values)
             n_ruotati += correggi_campi_ruotati(writer, page, field_values)
     print(f"  ✓ Aspetto rigenerato per {n_ruotati} campi ruotati")
 
     # Inserisce immagine se presente
-    image_path_str = char.get("info", {}).get("image_path", "")
+    image_path_str = get_info_field(char, "image_path")
     if image_path_str:
         image_path = Path(image_path_str)
         if not image_path.is_absolute():
@@ -914,8 +970,8 @@ Workflow:
     with open(config_path, encoding="utf-8") as f:
         config = json.load(f)
 
-    with open(chars_file, encoding="utf-8") as f:
-        characters = [c for c in json.load(f) if "character_name" in c]
+    # Validazione del file personaggi (termina in caso di errori)
+    characters = load_and_validate(chars_file)
 
     mapped = sum(1 for f in config["fields"].values() if f.get("json_path"))
     total  = len(config["fields"])

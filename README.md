@@ -12,20 +12,22 @@ Strumenti Python per compilare automaticamente le schede personaggio di **L'Unic
 - [Configurazione](#configurazione)
 - [Utilizzo — Roll20](#utilizzo--roll20)
 - [Utilizzo — PDF](#utilizzo--pdf)
-- [Formato del file personaggi](#formato-del-file-personaggi)
+- [Validazione del file personaggi](#validazione-del-file-personaggi)
 - [Licenza](#licenza)
 
 ---
 
 ## Panoramica
 
-Il progetto è composto da tre script principali:
+Il progetto è composto da cinque script principali:
 
 | Script | Descrizione |
 |---|---|
 | `fill_sheets.py` | Compila le schede personaggio su Roll20 tramite automazione browser (Playwright + CDP) |
+| `dump_sheet.py` | Operazione inversa: esporta le schede Roll20 compilate in un JSON nel formato di `personaggi.json` |
 | `fill_pdf.py` | Compila una scheda PDF editabile a partire da un file di configurazione |
 | `parse_pdf_fields.py` | Analizza un PDF editabile e genera automaticamente il file di configurazione dei campi |
+| `validate_characters.py` | Valida un file personaggi contro `personaggi.schema.json` (eseguito anche all'avvio di `fill_pdf.py` e `fill_sheets.py`) |
 
 ---
 
@@ -34,8 +36,11 @@ Il progetto è composto da tre script principali:
 ```
 tor2e_roll20/
 ├── fill_sheets.py              # Automazione Roll20
+├── dump_sheet.py               # Esportazione Roll20 → JSON
 ├── fill_pdf.py                 # Compilazione PDF
 ├── parse_pdf_fields.py         # Analisi campi PDF
+├── validate_characters.py      # Validazione del file personaggi
+├── personaggi.schema.json      # JSON Schema del file personaggi
 ├── personaggi.json             # Dati dei personaggi (da compilare)
 ├── config_scheda_editabile.json # Configurazione campi PDF
 ├── scheda_editabile.pdf        # Template PDF (non incluso — da procurarsi)
@@ -55,7 +60,7 @@ tor2e_roll20/
 
 ```bash
 pip install -r requirements.txt
-playwright install chromium
+playwright install chromiumx
 ```
 
 ---
@@ -64,7 +69,7 @@ playwright install chromium
 
 ### `personaggi.json`
 
-Il file contiene la lista dei personaggi da compilare. Ogni personaggio ha questa struttura:
+Il file contiene la lista dei personaggi da compilare. La struttura completa è definita in `personaggi.schema.json` (vedi [Validazione](#validazione-del-file-personaggi)); in sintesi, ogni personaggio ha questa forma:
 
 ```json
 [
@@ -80,6 +85,8 @@ Il file contiene la lista dei personaggi da compilare. Ogni personaggio ha quest
       "flaws":              "",
       "patron":             "",
       "shadow_weakness":    "",
+      "fellowship_focus":   "",
+      "bio":                "**Eglantina Scarpati** è una hobbit della Contea...\n\n## Una mattina di partenza\n\n*Testo in corsivo*, **grassetto**.",
       "image_path":         "imgs/eglantina_scarpati.png"
     },
     "attributes": {
@@ -100,15 +107,19 @@ Il file contiene la lista dei personaggi da compilare. Ogni personaggio ha quest
     },
     "virtues":  "Prodezza (ing.)",
     "rewards":  "",
-    "bio": "**Eglantina Scarpati** è una hobbit della Contea...\n\n## Una mattina di partenza\n\n*Testo in corsivo*, **grassetto**.",
     "skills": {
       "awe":       { "rating": 0, "favoured": 0 },
-      "courtesy":  { "rating": 2, "favoured": 1 }
+      "courtesy":  { "rating": 2, "favoured": 1 },
+      "...":       "tutte le 18 abilità sono obbligatorie"
     },
     "combat_skills": {
-      "swords": { "rating": 2, "favoured": 0 }
+      "axes":   { "rating": 0, "favoured": 0 },
+      "bows":   { "rating": 1, "favoured": 0 },
+      "spears": { "rating": 0, "favoured": 0 },
+      "swords": { "rating": 2, "favoured": 0 },
+      "brawl":  { "rating": 0, "favoured": 0 }
     },
-    "combat": { "stance": 2 },
+    "stance": 2,
     "weapons": [
       {
         "skill_name":  "Spada corta",
@@ -181,6 +192,7 @@ CHROME_PROFILE   = "Default"
 
 ```bash
 python fill_sheets.py --mode cdp
+python fill_sheets.py --mode cdp --characters out_of_the_shadow.json
 ```
 
 ### Note
@@ -188,6 +200,20 @@ python fill_sheets.py --mode cdp
 - I personaggi vengono cercati nel Journal per nome esatto. Se non trovati, vengono creati automaticamente.
 - La scheda supporta la versione **The One Ring 2e (Advanced)** di Roll20.
 - Stance di combattimento: `1`=Offensiva, `2`=Aperta, `3`=Difensiva, `4`=Arretrata.
+
+### Esportazione da Roll20 (`dump_sheet.py`)
+
+Fa l'operazione inversa: legge le schede già compilate e crea `personaggi_dump.json` nello stesso formato di `personaggi.json`. Chrome va avviato in modalità debug e la campagna aperta come per `fill_sheets.py`.
+
+```bash
+python dump_sheet.py --names "Eglantina Scarpati" "Esmeralda Tuc"
+python dump_sheet.py --names-file nomi.txt --output personaggi_dump.json
+python dump_sheet.py        # usa i nomi presenti in personaggi.json
+```
+
+- I personaggi vengono cercati nel Journal per nome (esatto, poi parziale), anche dentro cartelle chiuse. Non vengono mai creati né modificati.
+- La biografia viene riconvertita da HTML a Markdown e salvata in `info.bio`.
+- L'avatar viene scaricato in `imgs/` e referenziato in `info.image_path`.
 
 ---
 
@@ -261,6 +287,44 @@ Aggiungi il campo `image_path` in `info` nel JSON:
 ```
 
 L'immagine deve essere in formato PNG o JPEG. Viene centrata automaticamente nello spazio disponibile mantenendo le proporzioni.
+
+---
+
+## Validazione del file personaggi
+
+La struttura del file personaggi è descritta in `personaggi.schema.json`, scritto in [JSON Schema](https://json-schema.org/) (draft 2020-12): lo standard per descrivere i documenti JSON, l'analogo di XSD per l'XML.
+
+`fill_pdf.py` e `fill_sheets.py` validano il file all'avvio, prima di compilare qualsiasi scheda o aprire il browser. Si può anche lanciare la validazione da sola:
+
+```bash
+python validate_characters.py personaggi.json
+```
+
+Gli **errori** fermano l'esecuzione: campi obbligatori mancanti, campi non previsti (spesso refusi, come `stelth` al posto di `stealth`), tipi sbagliati (`"13"` invece di `13`), valori fuori intervallo (abilità oltre 6, posizione diversa da 1-4, `combat_prof` non valido). Esempio:
+
+```
+→ Validazione personaggi.json...
+  ✗ 'Svior figlio di Ulfrung' → skills: campo non previsto: 'stelth' (refuso?)
+  ✗ 'Svior figlio di Ulfrung' → skills.awe.rating: valore 7 sopra il massimo 6
+✗ 2 errori: correggi il file e riprova.
+```
+
+Gli **avvisi** non fermano l'esecuzione: immagine non trovata, bio vuota, arma senza competenza (`combat_prof` vuoto), nomi di personaggio ripetuti (le schede si sovrascrivono), `bio` o `image_path` al primo livello invece che in `info` (schema vecchio, ancora accettato).
+
+Senza il modulo `jsonschema` installato, il controllo dello schema viene saltato con un avviso e restano solo gli altri controlli.
+
+### Validazione nell'editor
+
+Lo schema si può collegare all'editor per avere autocompletamento ed errori evidenziati mentre si scrive il JSON. In VS Code, in `.vscode/settings.json`:
+
+```json
+"json.schemas": [
+  {
+    "fileMatch": ["personaggi*.json", "out_of_the_shadow.json", "piromanti.json", "!personaggi.schema.json"],
+    "url": "./personaggi.schema.json"
+  }
+]
+```
 
 ---
 

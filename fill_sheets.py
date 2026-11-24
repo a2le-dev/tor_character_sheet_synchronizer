@@ -402,8 +402,9 @@ def fill_character(page, char: dict) -> None:
     fill_attr_text(frame, "flaws",               info.get("flaws", ""))
 
     # ── Biografia (compilata nella dialog Edit, fuori dall'iframe) ──
-    if char.get("bio"):
-        fill_bio(page, char["bio"])
+    bio = info.get("bio") or char.get("bio")   # schema attuale: info.bio
+    if bio:
+        fill_bio(page, bio)
 
     # ── Attributi base (campi number, non radio) ──────────────────
     print("  [ATTR] Attributi base...")
@@ -556,9 +557,9 @@ def fill_character(page, char: dict) -> None:
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def load_characters(path: Path) -> list[dict]:
-    with open(path, encoding="utf-8") as f:
-        chars = json.load(f)
-    return [c for c in chars if "character_name" in c]
+    """Carica i personaggi validandoli contro personaggi.schema.json."""
+    from validate_characters import load_and_validate
+    return load_and_validate(path)
 
 
 def run_session(page, characters: list[dict]) -> None:
@@ -702,11 +703,16 @@ Modalità:
         "--mode", choices=["cdp", "profile"], default="cdp",
         help="Modalità di connessione (default: cdp)"
     )
+    parser.add_argument(
+        "--characters", default=str(CHARACTERS_FILE),
+        help=f"File JSON dei personaggi (default: {CHARACTERS_FILE.name})"
+    )
     args = parser.parse_args()
 
-    characters = load_characters(CHARACTERS_FILE)
+    # Validazione prima di aprire il browser
+    characters = load_characters(Path(args.characters))
     if not characters:
-        print("Nessun personaggio trovato in personaggi.json")
+        print(f"Nessun personaggio trovato in {args.characters}")
         sys.exit(1)
 
     print(f"Modalità: {args.mode}")
